@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khủng hoảng mục đích sống – NCKH Đại học Bách Khoa Hà Nội</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:        #faf7f2;
+    --paper:        #f5f0e8;
+    --ink:          #1a1612;
+    --ink-light:    #3d3630;
+    --ink-muted:    #7a6e64;
+    --accent:       #8b2635;
+    --accent-deep:  #5c1520;
+    --gold:         #c4973a;
+    --gold-light:   #e8c97a;
+    --blue-dark:    #1a2744;
+    --rule:         #c9bfae;
+    --sidebar-w:    300px;
+    --content-max:  820px;
+    --body-font:    'Source Serif 4', Georgia, serif;
+    --display-font: 'Playfair Display', Georgia, serif;
+    --mono-font:    'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body-font);
+    line-height: 1.85;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  #toc-sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--blue-dark);
+    color: #ddd;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s ease;
+  }
+  #toc-sidebar::-webkit-scrollbar { width: 4px; }
+  #toc-sidebar::-webkit-scrollbar-thumb { background: #ffffff22; border-radius: 2px; }
+
+  .toc-header {
+    padding: 2rem 1.5rem 1.2rem;
+    border-bottom: 1px solid #ffffff18;
+    flex-shrink: 0;
+  }
+  .toc-logo {
+    font-family: var(--mono-font);
+    font-size: .65rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: .6rem;
+    opacity: .8;
+  }
+  .toc-title {
+    font-family: var(--display-font);
+    font-size: .9rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .toc-subtitle {
+    font-size: .7rem;
+    color: #aaa;
+    margin-top: .35rem;
+    font-style: italic;
+  }
+
+  .toc-nav { padding: .8rem 0 2rem; flex: 1; }
+  .toc-section-label {
+    font-family: var(--mono-font);
+    font-size: .58rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 1rem 1.5rem .3rem;
+    opacity: .75;
+  }
+  .toc-nav a {
+    display: block;
+    padding: .38rem 1.5rem .38rem 2rem;
+    font-size: .78rem;
+    color: #c8c0b8;
+    text-decoration: none;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: all .18s;
+  }
+  .toc-nav a:hover,
+  .toc-nav a.active {
+    color: #fff;
+    border-left-color: var(--gold);
+    background: #ffffff0a;
+    padding-left: 2.3rem;
+  }
+  .toc-nav a.chapter {
+    padding-left: 1.5rem;
+    color: #e8e0d8;
+    font-weight: 600;
+    font-size: .8rem;
+  }
+  .toc-nav a.chapter:hover,
+  .toc-nav a.chapter.active {
+    color: #fff;
+    padding-left: 1.8rem;
+  }
+
+  /* ── MAIN ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-height: 100vh;
+  }
+
+  .content-wrap {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 3rem 6rem;
+  }
+
+  /* ── COVER ── */
+  #cover {
+    background: var(--blue-dark);
+    color: #fff;
+    padding: 4rem 3rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 110% 120%, #8b263522 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at -10% -20%, #c4973a18 0%, transparent 55%);
+    pointer-events: none;
+  }
+  #cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--accent), var(--gold), transparent);
+  }
+
+  .cover-inner { max-width: var(--content-max); margin: 0 auto; position: relative; }
+  .cover-institution {
+    font-family: var(--mono-font);
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: .5rem;
+    opacity: .85;
+  }
+  .cover-divider {
+    width: 40px; height: 2px;
+    background: var(--gold);
+    margin: 1.2rem 0 1.6rem;
+    opacity: .6;
+  }
+  .cover-label {
+    font-family: var(--mono-font);
+    font-size: .65rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: .6rem;
+  }
+  .cover-subtitle {
+    font-family: var(--display-font);
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .cover-main-title {
+    font-family: var(--display-font);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fff;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 2px 12px #0005;
+  }
+  .cover-main-title em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .cover-meta-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .cover-meta-label {
+    font-family: var(--mono-font);
+    font-size: .6rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: .5rem;
+    opacity: .8;
+  }
+  .cover-meta-value {
+    font-size: .9rem;
+    color: #e8e0d8;
+    line-height: 1.6;
+  }
+
+  .authors-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+    color: #d8d0c8;
+    margin-top: .4rem;
+  }
+  .authors-table td {
+    padding: .35rem 0;
+    border-bottom: 1px solid #ffffff10;
+  }
+  .authors-table td:first-child { font-weight: 600; color: #fff; }
+  .authors-table td:last-child { color: #aaa; font-size: .78rem; text-align: right; }
+
+  .cover-date {
+    margin-top: 2.5rem;
+    font-size: .8rem;
+    color: #888;
+    font-style: italic;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body { padding-top: 4rem; }
+
+  /* Section blocks */
+  .part-header {
+    margin: 4rem 0 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .part-tag {
+    font-family: var(--mono-font);
+    font-size: .6rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .5rem;
+  }
+  .part-title {
+    font-family: var(--display-font);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.25;
+  }
+
+  .chapter-header {
+    margin: 3.5rem 0 1.8rem;
+    position: relative;
+    padding-left: 1.2rem;
+  }
+  .chapter-header::before {
+    content: '';
+    position: absolute;
+    left: 0; top: .25em; bottom: .25em;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--gold));
+    border-radius: 2px;
+  }
+  .chapter-title {
+    font-family: var(--display-font);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.3;
+  }
+  .chapter-num {
+    font-family: var(--mono-font);
+    font-size: .62rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .4rem;
+  }
+
+  .section-header {
+    margin: 2.5rem 0 1rem;
+  }
+  .section-title {
+    font-family: var(--display-font);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .section-num {
+    font-family: var(--mono-font);
+    font-size: .58rem;
+    letter-spacing: .15em;
+    color: var(--ink-muted);
+    margin-bottom: .25rem;
+    text-transform: uppercase;
+  }
+
+  .subsection-title {
+    font-family: var(--display-font);
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--ink-light);
+    margin: 2rem 0 .8rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+    hyphens: auto;
+    font-size: 1rem;
+    color: var(--ink-light);
+  }
+
+  /* Drop cap for first paragraph of each part */
+  .dropcap::first-letter {
+    font-family: var(--display-font);
+    font-size: 3.8em;
+    font-weight: 700;
+    float: left;
+    line-height: .8;
+    margin: .05em .12em -.05em 0;
+    color: var(--accent);
+  }
+
+  /* Lists */
+  ul.body-list {
+    margin: .8rem 0 1.2rem 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.body-list li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: .9rem;
+    font-size: .97rem;
+    color: var(--ink-light);
+    line-height: 1.75;
+  }
+  ul.body-list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: .55em;
+    top: .5em;
+  }
+  ul.body-list li strong {
+    color: var(--ink);
+  }
+
+  ol.body-list-num {
+    margin: .8rem 0 1.2rem 0;
+    padding: 0;
+    counter-reset: body-counter;
+    list-style: none;
+  }
+  ol.body-list-num li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: .9rem;
+    font-size: .97rem;
+    color: var(--ink-light);
+    line-height: 1.75;
+    counter-increment: body-counter;
+  }
+  ol.body-list-num li::before {
+    content: counter(body-counter);
+    position: absolute;
+    left: 0;
+    width: 1.4rem;
+    height: 1.4rem;
+    background: var(--accent);
+    color: #fff;
+    font-size: .62rem;
+    font-family: var(--mono-font);
+    font-weight: 500;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: .22em;
+  }
+
+  /* Callout / pull quote */
+  .callout {
+    margin: 2rem 0;
+    padding: 1.4rem 1.8rem;
+    background: var(--paper);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::after {
+    content: '"';
+    position: absolute;
+    right: 1rem; bottom: -1rem;
+    font-family: var(--display-font);
+    font-size: 7rem;
+    color: #0000000a;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .callout p {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 1rem;
+    margin: 0;
+    text-align: left;
+  }
+  .callout-source {
+    font-family: var(--mono-font);
+    font-size: .65rem;
+    letter-spacing: .1em;
+    color: var(--ink-muted);
+    margin-top: .6rem;
+    text-transform: uppercase;
+  }
+
+  /* TABLES */
+  .table-wrap {
+    margin: 1.8rem 0;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px #0000000d;
+  }
+  .table-caption {
+    font-family: var(--mono-font);
+    font-size: .65rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: .6rem;
+    padding-left: .2rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+    background: #fff;
+  }
+  thead th {
+    background: var(--blue-dark);
+    color: #fff;
+    font-family: var(--display-font);
+    font-weight: 600;
+    font-size: .85rem;
+    padding: .9rem 1.2rem;
+    text-align: left;
+    border: none;
+  }
+  tbody tr { border-bottom: 1px solid #ece6dd; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #faf7f0; }
+  tbody td {
+    padding: .9rem 1.2rem;
+    color: var(--ink-light);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tbody td:first-child { font-weight: 600; color: var(--ink); }
+
+  /* Stats blocks */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.8rem 0;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+  }
+  .stat-number {
+    font-family: var(--display-font);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: .3rem;
+  }
+  .stat-label {
+    font-size: .8rem;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  /* Footnote */
+  .footnote {
+    font-size: .8rem;
+    color: var(--ink-muted);
+    font-style: italic;
+    padding: .6rem 1rem;
+    border-left: 2px solid var(--rule);
+    margin: 1rem 0;
+  }
+
+  /* References */
+  .ref-section { margin-top: 4rem; }
+  .ref-group-title {
+    font-family: var(--mono-font);
+    font-size: .65rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 1.8rem 0 .8rem;
+  }
+  .ref-item {
+    display: flex;
+    gap: .8rem;
+    margin-bottom: .9rem;
+    font-size: .875rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+  .ref-num {
+    font-family: var(--mono-font);
+    font-size: .7rem;
+    font-weight: 500;
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 2.2rem;
+    padding-top: .1rem;
+  }
+
+  /* TOC page */
+  .toc-page {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    margin: 2rem 0 3rem;
+  }
+  .toc-page-title {
+    font-family: var(--display-font);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 1.2rem;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-page-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: .35rem 0;
+    font-size: .88rem;
+    color: var(--ink-light);
+    border-bottom: 1px dotted #d8d0c4;
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .toc-page-item:hover { color: var(--accent); }
+  .toc-page-item.toc-chapter {
+    font-weight: 600;
+    color: var(--blue-dark);
+    margin-top: .6rem;
+  }
+  .toc-page-item.toc-sub { padding-left: 1.5rem; }
+  .toc-page-num {
+    font-family: var(--mono-font);
+    font-size: .72rem;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    margin-left: .8rem;
+  }
+
+  /* Progress bar */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 999;
+    width: 0%;
+    transition: width .1s linear;
+  }
+
+  /* Mobile toggle */
+  #toc-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem; right: 1rem;
+    z-index: 200;
+    background: var(--blue-dark);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: .5rem .8rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  /* Horizontal rule */
+  .fancy-hr {
+    border: none;
+    text-align: center;
+    margin: 3rem 0;
+    position: relative;
+    height: 1px;
+    background: var(--rule);
+  }
+  .fancy-hr::after {
+    content: '◆';
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--cream);
+    padding: 0 .8rem;
+    color: var(--gold);
+    font-size: .7rem;
+  }
+
+  /* Highlight box */
+  .highlight-box {
+    background: linear-gradient(135deg, #fff8f0 0%, #fff3e8 100%);
+    border: 1px solid #e8c97a44;
+    border-radius: 8px;
+    padding: 1.3rem 1.6rem;
+    margin: 1.6rem 0;
+    position: relative;
+  }
+  .highlight-box-label {
+    font-family: var(--mono-font);
+    font-size: .6rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: .5rem;
+  }
+  .highlight-box p { margin: 0; font-size: .95rem; }
+
+  /* Conclusion section */
+  #conclusion-section {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, #2a3a5c 100%);
+    color: #e8e0d8;
+    padding: 3rem;
+    border-radius: 10px;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #conclusion-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 110% 110%, #8b263520 0%, transparent 55%);
+    pointer-events: none;
+  }
+  #conclusion-section .part-tag { color: var(--gold-light); }
+  #conclusion-section .part-title { color: #fff; }
+  #conclusion-section p { color: #d8d0c8; }
+
+  /* Back to top */
+  #back-top {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--blue-dark);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 42px; height: 42px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 99;
+    box-shadow: 0 4px 14px #0004;
+  }
+  #back-top.visible { opacity: 1; }
+  #back-top:hover { background: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 0px; }
+    #toc-sidebar {
+      transform: translateX(-280px);
+      width: 280px;
+    }
+    #toc-sidebar.open {
+      transform: translateX(0);
+    }
+    #main { margin-left: 0; }
+    #toc-toggle { display: flex; align-items: center; gap: .4rem; font-size: .8rem; }
+    .content-wrap { padding: 0 1.2rem 5rem; }
+    #cover { padding: 3rem 1.5rem 3.5rem; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    #conclusion-section { padding: 2rem 1.5rem; }
+  }
+  @media (max-width: 500px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .authors-table td:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- SIDEBAR TOC -->
+<aside id="toc-sidebar">
+  <div class="toc-header">
+    <div class="toc-logo">ĐHBK Hà Nội · NCKH 2026</div>
+    <div class="toc-title">Khủng hoảng Mục đích Sống</div>
+    <div class="toc-subtitle">Thực trạng & Giải pháp cho Giới trẻ Việt Nam</div>
+  </div>
+  <nav class="toc-nav">
+    <div class="toc-section-label">Mở đầu</div>
+    <a href="#cover" class="chapter">◎ Trang bìa</a>
+    <a href="#toc-page">◎ Mục lục</a>
+    <a href="#phan-mo-dau" class="chapter">PHẦN I. MỞ ĐẦU</a>
+    <a href="#tinh-cap-thiet">1. Tính cấp thiết</a>
+    <a href="#tong-quan">2. Tổng quan đề tài</a>
+    <a href="#muc-dich">3. Mục đích, nhiệm vụ</a>
+    <a href="#doi-tuong">4. Đối tượng, phạm vi</a>
+    <a href="#phuong-phap">5. Phương pháp</a>
+    <a href="#dong-gop">6. Đóng góp</a>
+    <a href="#ket-cau">7. Kết cấu</a>
+    <div class="toc-section-label">Nội dung</div>
+    <a href="#phan-noi-dung" class="chapter">PHẦN II. NỘI DUNG</a>
+    <a href="#chuong-1" class="chapter">Chương I. Cơ sở lý luận</a>
+    <a href="#khai-niem">1. Khái niệm mục đích sống</a>
+    <a href="#vai-tro">2. Vai trò mục đích sống</a>
+    <a href="#gioi-tre">3. Đặc điểm tâm lý giới trẻ</a>
+    <a href="#chuong-2" class="chapter">Chương II. Thực trạng</a>
+    <a href="#thuc-trang">1. Thực trạng khủng hoảng</a>
+    <a href="#nguyen-nhan">2. Nguyên nhân</a>
+    <a href="#ca-nhan">  2.1 Cá nhân</a>
+    <a href="#gia-dinh-nn">  2.2 Gia đình</a>
+    <a href="#nha-truong-nn">  2.3 Nhà trường</a>
+    <a href="#xa-hoi-nn">  2.4 Xã hội</a>
+    <a href="#he-qua">3. Hệ quả</a>
+    <a href="#he-qua-ca-nhan">  3.1 Cá nhân</a>
+    <a href="#he-qua-gia-dinh">  3.2 Gia đình</a>
+    <a href="#he-qua-xa-hoi">  3.3 Xã hội</a>
+    <a href="#chuong-3" class="chapter">Chương III. Giải pháp</a>
+    <a href="#giai-phap-gioi-tre">1. Đối với giới trẻ</a>
+    <a href="#giai-phap-gia-dinh">2. Đối với gia đình</a>
+    <a href="#giai-phap-nha-truong">3. Đối với nhà trường</a>
+    <a href="#giai-phap-xa-hoi">4. Đối với xã hội</a>
+    <div class="toc-section-label">Kết thúc</div>
+    <a href="#ket-luan" class="chapter">PHẦN III. KẾT LUẬN</a>
+    <a href="#tai-lieu">Tài liệu tham khảo</a>
+  </nav>
+</aside>
+
+<!-- MOBILE TOGGLE -->
+<button id="toc-toggle" aria-label="Mở mục lục">☰ Mục lục</button>
+
+<!-- BACK TO TOP -->
+<button id="back-top" title="Lên đầu trang">↑</button>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+  <!-- COVER -->
+  <section id="cover">
+    <div class="cover-inner">
+      <div class="cover-institution">Bộ Giáo dục và Đào tạo</div>
+      <div class="cover-institution">Đại học Bách Khoa Hà Nội</div>
+      <div class="cover-divider"></div>
+      <div class="cover-label">Báo cáo tổng kết · Tháng Sinh viên Nghiên cứu Khoa học</div>
+
+      <h1 class="cover-main-title">
+        Khủng hoảng Mục đích Sống của<br>
+        Một bộ phận <em>Giới trẻ Việt Nam</em><br>
+        Hiện nay – Thực trạng và Giải pháp
+      </h1>
+
+      <div class="cover-meta-grid">
+        <div>
+          <div class="cover-meta-label">Sinh viên thực hiện</div>
+          <table class="authors-table">
+            <tbody>
+              <tr><td>Đào Minh Đức</td><td>MSSV: 202513636</td><td>Trường Kinh tế</td></tr>
+              <tr><td>Phạm Quang Hưng</td><td>MSSV: 202513663</td><td>Trường Kinh tế</td></tr>
+              <tr><td>Nguyễn Hoàng Linh Giang</td><td>MSSV: 202513648</td><td>Trường Kinh tế</td></tr>
+              <tr><td>Trương Minh Đức</td><td>MSSV: 202513639</td><td>Trường Kinh tế</td></tr>
+              <tr><td>Nguyễn Quốc An</td><td>MSSV: 202513606</td><td>Trường Kinh tế</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="cover-meta-label">Người hướng dẫn</div>
+          <div class="cover-meta-value">TS. Hoàng Thị Hạnh<br><span style="font-size:.82rem;color:#aaa">Giảng viên khoa Lý luận Chính trị</span></div>
+        </div>
+      </div>
+      <div class="cover-date">Hà Nội, tháng 4 năm 2026</div>
+    </div>
+  </section>
+
+  <!-- CONTENT WRAP -->
+  <div class="content-wrap">
+
+    <!-- MỤC LỤC TRANG -->
+    <div id="toc-page" style="padding-top:3rem">
+      <div class="toc-page-title">Mục lục</div>
+      <a href="#phan-mo-dau" class="toc-page-item toc-chapter">PHẦN I. MỞ ĐẦU <span class="toc-page-num">1</span></a>
+      <a href="#tinh-cap-thiet" class="toc-page-item toc-sub">1. Tính cấp thiết của đề tài <span class="toc-page-num">1</span></a>
+      <a href="#tong-quan" class="toc-page-item toc-sub">2. Tổng quan đề tài <span class="toc-page-num">2</span></a>
+      <a href="#muc-dich" class="toc-page-item toc-sub">3. Mục đích, nhiệm vụ nghiên cứu <span class="toc-page-num">2</span></a>
+      <a href="#doi-tuong" class="toc-page-item toc-sub">4. Đối tượng, phạm vi nghiên cứu <span class="toc-page-num">3</span></a>
+      <a href="#phuong-phap" class="toc-page-item toc-sub">5. Phương pháp nghiên cứu <span class="toc-page-num">3</span></a>
+      <a href="#dong-gop" class="toc-page-item toc-sub">6. Đóng góp của đề tài <span class="toc-page-num">4</span></a>
+      <a href="#ket-cau" class="toc-page-item toc-sub">7. Kết cấu của đề tài <span class="toc-page-num">4</span></a>
+
+      <a href="#phan-noi-dung" class="toc-page-item toc-chapter" style="margin-top:.8rem">PHẦN II. NỘI DUNG NGHIÊN CỨU <span class="toc-page-num">4</span></a>
+      <a href="#chuong-1" class="toc-page-item toc-chapter">Chương I. CƠ SỞ LÝ LUẬN VỀ KHỦNG HOẢNG MỤC ĐÍCH SỐNG <span class="toc-page-num">4</span></a>
+      <a href="#khai-niem" class="toc-page-item toc-sub">1. Khái niệm mục đích sống và khủng hoảng mục đích sống <span class="toc-page-num">4</span></a>
+      <a href="#vai-tro" class="toc-page-item toc-sub">2. Vai trò của mục đích sống đối với con người <span class="toc-page-num">8</span></a>
+      <a href="#gioi-tre" class="toc-page-item toc-sub">3. Khái niệm và đặc điểm tâm lý giới trẻ Việt Nam <span class="toc-page-num">10</span></a>
+
+      <a href="#chuong-2" class="toc-page-item toc-chapter">Chương II. THỰC TRẠNG KHỦNG HOẢNG MỤC ĐÍCH SỐNG <span class="toc-page-num">11</span></a>
+      <a href="#thuc-trang" class="toc-page-item toc-sub">1. Thực trạng khủng hoảng mục đích sống <span class="toc-page-num">11</span></a>
+      <a href="#nguyen-nhan" class="toc-page-item toc-sub">2. Nguyên nhân khủng hoảng <span class="toc-page-num">17</span></a>
+      <a href="#ca-nhan" class="toc-page-item" style="padding-left:3rem">2.1. Nguyên nhân từ cá nhân <span class="toc-page-num">17</span></a>
+      <a href="#gia-dinh-nn" class="toc-page-item" style="padding-left:3rem">2.2. Nguyên nhân từ gia đình <span class="toc-page-num">19</span></a>
+      <a href="#nha-truong-nn" class="toc-page-item" style="padding-left:3rem">2.3. Nguyên nhân từ nhà trường <span class="toc-page-num">21</span></a>
+      <a href="#xa-hoi-nn" class="toc-page-item" style="padding-left:3rem">2.4. Nguyên nhân từ xã hội <span class="toc-page-num">22</span></a>
+      <a href="#he-qua" class="toc-page-item toc-sub">3. Hệ quả của khủng hoảng mục đích sống <span class="toc-page-num">25</span></a>
+      <a href="#he-qua-ca-nhan" class="toc-page-item" style="padding-left:3rem">3.1. Đối với cá nhân <span class="toc-page-num">26</span></a>
+      <a href="#he-qua-gia-dinh" class="toc-page-item" style="padding-left:3rem">3.2. Đối với gia đình <span class="toc-page-num">27</span></a>
+      <a href="#he-qua-xa-hoi" class="toc-page-item" style="padding-left:3rem">3.3. Đối với xã hội <span class="toc-page-num">28</span></a>
+
+      <a href="#chuong-3" class="toc-page-item toc-chapter">Chương III. GIẢI PHÁP KHẮC PHỤC <span class="toc-page-num">28</span></a>
+      <a href="#giai-phap-gioi-tre" class="toc-page-item toc-sub">1. Đối với giới trẻ <span class="toc-page-num">29</span></a>
+      <a href="#giai-phap-gia-dinh" class="toc-page-item toc-sub">2. Đối với gia đình <span class="toc-page-num">30</span></a>
+      <a href="#giai-phap-nha-truong" class="toc-page-item toc-sub">3. Đối với nhà trường <span class="toc-page-num">31</span></a>
+      <a href="#giai-phap-xa-hoi" class="toc-page-item toc-sub">4. Đối với xã hội <span class="toc-page-num">32</span></a>
+
+      <a href="#ket-luan" class="toc-page-item toc-chapter" style="margin-top:.8rem">PHẦN III. KẾT LUẬN <span class="toc-page-num">33</span></a>
+      <a href="#tai-lieu" class="toc-page-item toc-chapter">DANH MỤC TÀI LIỆU THAM KHẢO <span class="toc-page-num">—</span></a>
+    </div>
+
+    <hr class="fancy-hr">
+
+    <!-- ═══════════════════════════════════════
+         PHẦN I. MỞ ĐẦU
+    ═══════════════════════════════════════ -->
+    <div id="phan-mo-dau" class="article-body">
+      <div class="part-header">
+        <div class="part-tag">Phần I</div>
+        <h2 class="part-title">Mở đầu</h2>
+      </div>
+
+      <!-- 1 -->
+      <div id="tinh-cap-thiet" class="section-header">
+        <div class="section-num">Mục 1</div>
+        <h3 class="section-title">Tính cấp thiết của đề tài nghiên cứu</h3>
+      </div>
+      <p class="dropcap">Trong suốt hơn ba thập kỷ kể từ thời kỳ Đổi mới, Việt Nam đã trải qua một quá trình chuyển đổi sâu sắc từ nền kinh tế kế hoạch hóa tập trung sang nền kinh tế thị trường định hướng xã hội chủ nghĩa. Đi kèm với những thành tựu rực rỡ về tăng trưởng kinh tế, xóa đói giảm nghèo và hội nhập toàn cầu là tốc độ đô thị hóa diễn ra mạnh mẽ chưa từng có. Không gian đô thị tại các thành phố lớn như Hà Nội, Thành phố Hồ Chí Minh, hay Đà Nẵng không chỉ là trung tâm của các hoạt động kinh tế, mà còn là nơi giao thoa của đa dạng các luồng văn hóa, tư tưởng và lối sống.</p>
+      <p>Tuy nhiên, chính trong bối cảnh chuyển đổi mang tính vĩ mô này, một nghịch lý phức tạp đã nảy sinh: sự gia tăng về mức sống vật chất dường như không tỷ lệ thuận với mức độ thỏa mãn về mặt tinh thần của con người, đặc biệt là ở thế hệ trẻ.</p>
+      <p>Tình trạng cạn kiệt năng lượng, hoài nghi về giá trị bản thân, áp lực đồng trang lứa và sự trống rỗng về mục đích cuộc đời không chỉ đơn thuần là những vấn đề tâm lý cá nhân đơn lẻ, mà nó phản ánh những đứt gãy sâu sắc trong cấu trúc xã hội hiện đại. Khi một bộ phận thanh niên mất đi động lực cống hiến, chìm đắm trong sự hoang mang và không tìm thấy sợi dây liên kết biện chứng giữa lý tưởng cá nhân với mục tiêu chung của cộng đồng, sự phát triển bền vững của quốc gia chắc chắn sẽ bị đe dọa.</p>
+      <p>Sự thay đổi cấu trúc kinh tế - xã hội nhanh chóng đã làm suy yếu phần nào các thiết chế truyền thống như gia đình mở rộng, tình làng nghĩa xóm, và thay vào đó là lối sống cá nhân hóa, cạnh tranh cao độ mang đậm dấu ấn của văn hóa đô thị và chủ nghĩa tiêu dùng. Hệ quả của quá trình này là sự xuất hiện ngày càng phổ biến của trạng thái <strong>«khủng hoảng hiện sinh»</strong> — một tình trạng tổn thương tâm lý sâu sắc khi cá nhân hoài nghi về mục đích, mục đích sống và giá trị cốt lõi của bản thân mình trong thế giới.</p>
+      <p>Hiện tượng đánh mất định hướng, cảm giác vô nghĩa và trạng thái vô chuẩn mực đang len lỏi vào đời sống của một bộ phận không nhỏ thanh thiếu niên tại các thành phố lớn, phản ánh qua các chỉ báo đáng lo ngại về sức khỏe tâm thần, tỷ lệ trầm cảm, sự tha hóa học đường và những hành vi lệch chuẩn. Do đó nhóm chúng tôi lựa chọn đề tài này nhằm nghiên cứu thấu đáo căn nguyên, biểu hiện và tìm ra giải pháp cho cuộc khủng hoảng này mang tính cấp thiết không chỉ đối với sự phát triển cá nhân của thanh niên mà còn đối với sự phát triển bền vững của toàn xã hội.</p>
+
+      <!-- 2 -->
+      <div id="tong-quan" class="section-header">
+        <div class="section-num">Mục 2</div>
+        <h3 class="section-title">Tổng quan đề tài</h3>
+      </div>
+      <p>Các nghiên cứu trước đây về đời sống của thanh niên đô thị tại Việt Nam và trên thế giới đã bước đầu tiếp cận vấn đề này dưới nhiều lăng kính khác nhau. Trong lĩnh vực tâm lý học và sức khỏe cộng đồng, các học giả đã chỉ ra mối liên hệ nhân quả giữa áp lực học tập, sự kỳ vọng của gia đình và các rối loạn tâm lý như trầm cảm, lo âu. Ở góc độ xã hội học và nhân học văn hóa, các công trình nghiên cứu đã thảo luận về sự đứt gãy giữa văn hóa truyền thống và lối sống hiện đại, sự tha hóa trong môi trường đô thị và những nỗ lực của giới trẻ nhằm tái thiết lập bản sắc thông qua các thực hành văn hóa, tôn giáo mới.</p>
+      <p>Tiêu biểu trên bình diện quốc tế, bên cạnh nền tảng tư tưởng kinh điển của Karl Marx về <em>«sự tha hóa»</em>, các học giả đương đại như Byung-Chul Han với tác phẩm <em>The Burnout Society</em> (Xã hội mệt mỏi) [10] hay Michael Sandel [15] đã chỉ rõ cách logic cạnh tranh khốc liệt của thị trường xâm lấn và làm suy yếu các giá trị nhân văn cốt lõi. Tại Việt Nam, hướng tiếp cận này cũng được vận dụng qua một số chuyên khảo, điển hình như công trình <em>Quan niệm của C. Mác về tha hóa và ý nghĩa của quan niệm đó đối với phát triển con người Việt Nam hiện nay</em> của tác giả Nguyễn Thị Thanh Huyền (2010) [3].</p>
+      <p>Tuy nhiên, một công trình nghiên cứu tổng thể, kết hợp chặt chẽ giữa các nền tảng lý thuyết vĩ mô (chính trị học, xã hội học) và các dữ liệu vi mô (tâm lý học thực chứng) để phân tích trực diện về <strong>«khủng hoảng mục đích sống»</strong> vẫn còn nhiều khoảng trống cần được lấp đầy.</p>
+
+      <!-- 3 -->
+      <div id="muc-dich" class="section-header">
+        <div class="section-num">Mục 3</div>
+        <h3 class="section-title">Mục đích, nhiệm vụ nghiên cứu đề tài</h3>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-box-label">Mục đích nghiên cứu</div>
+        <p>Đề tài được thực hiện nhằm mục đích <strong>giải mã bản chất của cuộc khủng hoảng mục đích sống</strong> ở một bộ phận giới trẻ đô thị Việt Nam hiện nay.</p>
+      </div>
+      <p><strong>Nhiệm vụ:</strong> Để đạt được mục đích này, đề tài thực hiện các nhiệm vụ cụ thể bao gồm: hệ thống hóa cơ sở lý luận về mục đích sống và sự tha hóa dưới ánh sáng của tâm lý học, xã hội học và lý luận chính trị; phân tích toàn diện thực trạng và các nguyên nhân sâu xa (từ cá nhân, gia đình, nhà trường đến cấu trúc xã hội) dẫn đến cuộc khủng hoảng này; từ đó, đề xuất một hệ thống các giải pháp đồng bộ và thiết thực nhằm giúp giới trẻ tái thiết lập hệ giá trị, khơi dậy khát vọng cống hiến, phù hợp với các chiến lược phát triển quốc gia.</p>
+
+      <!-- 4 -->
+      <div id="doi-tuong" class="section-header">
+        <div class="section-num">Mục 4</div>
+        <h3 class="section-title">Đối tượng, phạm vi nghiên cứu đề tài</h3>
+      </div>
+      <p><strong>Đối tượng:</strong> Đối tượng nghiên cứu trọng tâm của đề tài là trạng thái khủng hoảng mục đích sống của giới trẻ Việt Nam; bao gồm các biểu hiện, nguyên nhân và hệ quả của nó.</p>
+      <p><strong>Phạm vi:</strong> Phạm vi nghiên cứu được giới hạn ở đối tượng là một bộ phận giới trẻ (thanh niên, học sinh, sinh viên) đang sinh sống, học tập và làm việc tại các thành phố lớn ở Việt Nam (tiêu biểu như Thủ đô Hà Nội và Thành phố Hồ Chí Minh). Về mặt thời gian, đề tài tập trung vào bối cảnh xã hội đương đại, đặc biệt là giai đoạn chuyển đổi số, hậu đại dịch COVID-19 và tiến trình hội nhập quốc tế sâu rộng hiện nay.</p>
+
+      <!-- 5 -->
+      <div id="phuong-phap" class="section-header">
+        <div class="section-num">Mục 5</div>
+        <h3 class="section-title">Phương pháp nghiên cứu đề tài</h3>
+      </div>
+      <p>Đề tài sử dụng phương pháp luận của <strong>Triết học Mác-Lênin</strong> kết hợp với <strong>Tư tưởng Hồ Chí Minh</strong>; quan điểm, đường lối của Đảng Cộng sản Việt Nam và Chủ nghĩa Cộng đồng (Communitarianism) về công tác thanh niên làm nền tảng cốt lõi, tiếp cận hiện tượng khủng hoảng mục đích sống từ góc độ cấu trúc - chức năng và xem xét sự tác động qua lại của các yếu tố kinh tế - xã hội trong bối cảnh hiện đại.</p>
+      <p>Bên cạnh đó, đề tài kết hợp các phương pháp nghiên cứu liên ngành bao gồm: phương pháp phân tích, tổng hợp tài liệu (từ các công trình nghiên cứu trong và ngoài nước, các báo cáo dịch tễ học về sức khỏe tâm thần); phương pháp so sánh, đối chiếu các hệ hình lý thuyết; và phương pháp logic học để xây dựng các lập luận chặt chẽ, khách quan.</p>
+
+      <!-- 6 -->
+      <div id="dong-gop" class="section-header">
+        <div class="section-num">Mục 6</div>
+        <h3 class="section-title">Đóng góp của đề tài</h3>
+      </div>
+      <p><strong>Về mặt lý luận,</strong> đề tài hệ thống hóa cơ sở lý luận về mục đích sống và hiện tượng tha hóa của con người dưới góc nhìn của lý luận chính trị (trọng tâm là Chủ nghĩa Mác - Lênin và Tư tưởng Hồ Chí Minh). Qua đó, đề tài góp phần giải mã bản chất của cuộc khủng hoảng mục đích sống ở một bộ phận giới trẻ đô thị Việt Nam hiện nay. Sự đóng góp này làm rõ mối quan hệ biện chứng giữa tồn tại xã hội (những biến đổi, áp lực của nền kinh tế thị trường và không gian số) với ý thức xã hội (sự hoang mang, phai nhạt lý tưởng và tha hóa danh tính) của thanh niên trong bối cảnh đương đại.</p>
+      <p><strong>Về mặt thực tiễn,</strong> thông qua việc phân tích toàn diện thực trạng và các nguyên nhân sâu xa (từ cá nhân, gia đình, nhà trường đến cấu trúc xã hội), đề tài cung cấp một bức tranh toàn cảnh và sâu sắc về đời sống tinh thần, tư tưởng của giới trẻ. Điều này làm cơ sở khoa học vững chắc để các nhà hoạch định chính sách, các tổ chức giáo dục, Đoàn Thanh niên và các bậc phụ huynh thiết kế những chương trình can thiệp hiệu quả.</p>
+
+      <!-- 7 -->
+      <div id="ket-cau" class="section-header">
+        <div class="section-num">Mục 7</div>
+        <h3 class="section-title">Kết cấu của đề tài</h3>
+      </div>
+      <p>Bên cạnh phần Mở đầu giới thiệu tổng quan vấn đề, Kết luận khái quát những kết quả đạt được và Danh mục tài liệu tham khảo, nội dung chính của đề tài được trình bày trong <strong>3 chương và 17 tiết</strong>. Cụ thể: Chương I có 3 tiết, Chương II có 10 tiết, Chương III có 4 tiết.</p>
+    </div>
+
+    <hr class="fancy-hr">
+
+    <!-- ═══════════════════════════════════════
+         PHẦN II. NỘI DUNG
+    ═══════════════════════════════════════ -->
+    <div id="phan-noi-dung">
+      <div class="part-header">
+        <div class="part-tag">Phần II</div>
+        <h2 class="part-title">Nội dung Nghiên cứu</h2>
+      </div>
+
+      <!-- ══ CHƯƠNG I ══ -->
+      <div id="chuong-1" class="chapter-header">
+        <div class="chapter-num">Chương I</div>
+        <h2 class="chapter-title">Cơ sở Lý luận về Khủng hoảng Mục đích Sống</h2>
+      </div>
+
+      <!-- 1 -->
+      <div id="khai-niem" class="section-header">
+        <div class="section-num">Mục 1</div>
+        <h3 class="section-title">Khái niệm mục đích sống và khủng hoảng mục đích sống</h3>
+      </div>
+      <p>Để nhận diện bản chất của cuộc khủng hoảng, chúng ta cần thiết lập một hệ thống khái niệm rõ ràng, phân định rạch ròi giữa việc thỏa mãn các nhu cầu sinh học cá nhân và việc theo đuổi những giá trị sâu sắc của sự tồn tại.</p>
+
+      <div class="subsection-title">Mục đích sống</div>
+      <p>Dưới lăng kính của lý luận chính trị, đặc biệt là triết học Mác - Lênin, khái niệm <strong>«mục đích sống»</strong> không phải là một ý niệm trừu tượng hay trạng thái tâm lý cá nhân biệt lập. Mục đích sống được định nghĩa là hệ thống những mục tiêu, lý tưởng mang tính định hướng sâu sắc, được cá nhân nhận thức và nỗ lực hiện thực hóa thông qua hoạt động thực tiễn (trọng tâm là lao động sáng tạo). Một mục đích sống chân chính luôn đòi hỏi sự gắn kết hữu cơ giữa sự phát triển, hoàn thiện bản chất con người với sự tiến bộ chung của cộng đồng và xã hội.</p>
+      <p>Nghiên cứu kinh điển của Carol D. Ryff (1989) đã hệ thống hóa sự phát triển tâm lý toàn diện thành 6 chiều kích cốt lõi, trong đó bác bỏ quan điểm giản đơn cho rằng hạnh phúc chỉ là sự vắng bóng của cảm xúc tiêu cực. Đáng chú ý, <em>«mục đích sống»</em> được Ryff đặt ở vị trí trung tâm của mô hình này, đóng vai trò như một mỏ neo nội tâm giúp cá nhân duy trì tính định hướng và khả năng chống chịu trước những áp lực của thực tại.</p>
+      <div class="footnote">¹ Carol D. Ryff: <em>Happiness Is Everything, or Is It? Explorations on the Meaning of Psychological Well-Being</em>, Journal of Personality and Social Psychology, 57(6), 1069-1081 (1989).</div>
+
+      <!-- Table 1: 6 chiều kích Ryff -->
+      <div class="table-wrap">
+        <div class="table-caption">Bảng 1. Sáu chiều kích phát triển tâm lý toàn diện (Carol D. Ryff, 1989)</div>
+        <table>
+          <thead>
+            <tr><th>Chiều kích</th><th>Nội hàm và biểu hiện cốt lõi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. Chấp nhận bản thân</td><td>Thái độ tích cực, dung nạp đối với bản thân; thấu hiểu và chấp nhận cả những phẩm chất tốt và xấu; có cái nhìn bao dung, không hối tiếc cực đoan với quá khứ.</td></tr>
+            <tr><td>2. Quan hệ tích cực</td><td>Khả năng duy trì các mối quan hệ nồng ấm, tin cậy; sở hữu sự đồng cảm, tình cảm sâu sắc và hiểu được nghệ thuật nhượng bộ, tương hỗ trong tương tác xã hội.</td></tr>
+            <tr><td>3. Tự chủ</td><td>Tính tự quyết, độc lập; có khả năng chống lại áp lực xã hội và tự đánh giá bản thân bằng các tiêu chuẩn nội tại (internal locus of evaluation) thay vì tìm kiếm sự đồng tình từ đám đông.</td></tr>
+            <tr><td>4. Làm chủ môi trường</td><td>Năng lực chủ động lựa chọn, kiến tạo và thao tác trên các môi trường phức tạp xung quanh để phù hợp với nhu cầu và giá trị cá nhân.</td></tr>
+            <tr><td>5. <strong>Mục đích sống</strong></td><td>Sở hữu hệ thống niềm tin mang lại ý nghĩa cho sự tồn tại; có mục tiêu, ý định và cảm nhận về hướng đi rõ ràng xuyên suốt các giai đoạn của cuộc đời.</td></tr>
+            <tr><td>6. Phát triển cá nhân</td><td>Nhu cầu liên tục hiện thực hóa tiềm năng, mở rộng năng lực bản thân, cởi mở với trải nghiệm mới và không ngừng thay đổi để hoàn thiện.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Roy F. Baumeister (The Journal of Positive Psychology, 2013) [8] đã tiến hành các khảo sát quy mô lớn để bóc tách những đặc điểm mang tính đối lập giữa một cuộc đời <em>«hạnh phúc»</em> (happy life) và một cuộc đời <em>«có mục đích»</em> (life's purpose). Sự phân biệt này là cực kỳ quan trọng để giải thích tại sao giới trẻ sống trong điều kiện vật chất đầy đủ (hạnh phúc) vẫn có thể rơi vào khủng hoảng (thiếu mục đích sống). Theo đó, hạnh phúc chủ yếu gắn liền với việc thỏa mãn các nhu cầu và mong muốn mang tính sinh học, trong khi mục đích sống mang tính văn hóa và biểu tượng cao, đòi hỏi con người phải kiến tạo những diễn giải phức tạp dựa trên hệ giá trị của xã hội.</p>
+      <p>Dưới góc độ lý luận chính trị, đặc biệt là qua lăng kính của Chủ nghĩa Cộng đồng (Communitarianism), mục đích sống không chỉ là một trạng thái tâm lý cá nhân biệt lập. Các nhà tư tưởng như Michael Sandel [15], Alasdair MacIntyre hay Charles Taylor lập luận rằng bản sắc và mục đích cuộc đời của một con người được định hình một cách sâu sắc bởi các <em>«cộng đồng cấu thành»</em> như gia đình, tổ quốc, và các thiết chế văn hóa.</p>
+
+      <div class="subsection-title">Khủng hoảng mục đích sống</div>
+      <p>Từ nền tảng trên, <strong>«khủng hoảng mục đích sống»</strong> hay rộng hơn là <strong>«khủng hoảng hiện sinh»</strong> được hiểu là trạng thái mất đi định hướng, mất đi sự kết nối giữa cá nhân với các giá trị cốt lõi và cộng đồng. Vào những năm 1930, khi Hitler thực thi chính sách tàn bạo của chủ nghĩa phát xít, người Do Thái đã sử dụng thuật ngữ «khủng hoảng hiện sinh» khi nói về nỗi lo lắng, sợ hãi của mình. Đến năm 1970, bác sĩ người Đức Erik Erikson đã tiến hành một nghiên cứu về khủng hoảng hiện sinh từ góc độ tâm lý học, gọi là <em>«khủng hoảng danh tính»</em>.</p>
+      <p>Khác với cách tiếp cận thuần túy về tâm lý hay cảm xúc cá nhân, Chủ nghĩa Mác - Lênin nhìn nhận cuộc khủng hoảng mục đích sống là biểu hiện trần trụi của <strong>sự tha hóa con người</strong>. C.Mác chỉ ra rằng, bản chất của con người không phải là một thực thể trừu tượng cô lập, mà là <em>«tổng hòa các quan hệ xã hội»</em>. Khi các quan hệ xã hội này bị chi phối bởi logic của nền kinh tế thị trường khắc nghiệt, con người bắt đầu bị tha hóa khỏi chính sản phẩm của mình, khỏi quá trình lao động, khỏi bản chất loài và cuối cùng là tha hóa khỏi chính đồng loại.</p>
+      <div class="callout">
+        <p>Khi cá nhân không còn tìm thấy sợi dây liên kết biện chứng giữa nỗ lực tự thân với mục tiêu chung của cộng đồng, họ sẽ rơi vào trạng thái «3 Không» (không việc làm, không học tập, không đào tạo) hay trào lưu «Nằm thẳng». Đây chính là một «cuộc đình công hiện sinh», nơi người trẻ chọn cách từ bỏ kháng cự vì nhận thấy mọi nỗ lực đều bị guồng quay xã hội vắt kiệt mà không đem lại ý nghĩa tự thân.</p>
+        <div class="callout-source">Góc nhìn Chủ nghĩa Mác - Lênin</div>
+      </div>
+
+      <!-- 2 -->
+      <div id="vai-tro" class="section-header">
+        <div class="section-num">Mục 2</div>
+        <h3 class="section-title">Vai trò của mục đích sống đối với con người</h3>
+      </div>
+      <p>Mục đích sống không phải là một món trang sức mang tính triết học đạo đức dành riêng cho những nhà tư tưởng, mà là một <strong>nhu cầu sinh tồn mang tính sinh học và tâm lý học sâu sắc</strong>. Sự hiện diện hay vắng mặt của mục đích sống tác động trực tiếp đến sự tồn tại vật lý và tuổi thọ của con người.</p>
+      <p>Nghiên cứu theo dõi của Viện Y tế Quốc gia Hoa Kỳ (NIH) vào năm 2009 [9] đã thực hiện khảo sát trên 1.238 cá nhân trưởng thành sống tại cộng đồng trong thời gian trung bình 2.7 năm đã cung cấp những bằng chứng y khoa không thể chối cãi về vai trò bảo vệ của mục đích sống.</p>
+
+      <!-- Table NIH -->
+      <div class="table-wrap">
+        <div class="table-caption">Bảng 2. Mức độ tác động của Mục đích sống đối với tỷ lệ tử vong (NIH, 2009)</div>
+        <table>
+          <thead>
+            <tr><th>Chỉ số đo lường</th><th>Kết quả nghiên cứu</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tỷ lệ nguy cơ (Hazard Ratio - HR)</td>
+              <td>Khả năng tử vong giảm đáng kể, với tỷ số nguy cơ <strong>HR = 0.60</strong> (Khoảng tin cậy 95% CI = 0.42, 0.87) đối với nhóm có mục đích sống cao.</td>
+            </tr>
+            <tr>
+              <td>So sánh phân vị (Percentile comparison)</td>
+              <td>Tỷ lệ tử vong của một cá nhân nằm ở bách phân vị thứ 90 (nhóm có mục đích sống rất cao) chỉ bằng khoảng <strong>57%</strong> so với một cá nhân ở bách phân vị thứ 10.</td>
+            </tr>
+            <tr>
+              <td>Tính phổ quát về nhân khẩu học</td>
+              <td>Hiệu ứng bảo vệ sức khỏe và kéo dài tuổi thọ của mục đích sống <strong>không có sự khác biệt</strong> có ý nghĩa thống kê giữa nam và nữ, hay giữa các nhóm chủng tộc khác nhau.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Đối với giới trẻ, mục đích sống đóng vai trò như một <em>«bộ giáp tâm lý» (psychological buffer)</em>, giúp thanh thiếu niên chống lại những áp lực của việc định hình nhân cách, giảm thiểu nguy cơ rơi vào trạng thái trầm cảm hay các hành vi lệch chuẩn.</p>
+
+      <!-- 3 -->
+      <div id="gioi-tre" class="section-header">
+        <div class="section-num">Mục 3</div>
+        <h3 class="section-title">Khái niệm và đặc điểm tâm lý giới trẻ Việt Nam</h3>
+      </div>
+      <div class="subsection-title">Khái niệm giới trẻ Việt Nam</div>
+      <p>Về mặt pháp lý và nhân khẩu học, theo quy định tại Điều 1 Luật Thanh niên năm 2020, thanh niên (hay giới trẻ) Việt Nam là công dân Việt Nam từ đủ 16 tuổi đến 30 tuổi. Tuy nhiên, để nhận diện toàn diện chân dung của nhóm đối tượng này, khái niệm giới trẻ cần được soi chiếu qua nhiều chiều kích phức tạp của thời đại.</p>
+      <p>Dưới góc độ lịch sử - kinh tế, giới trẻ đô thị hiện nay (chủ yếu là thế hệ Z và Millennials muộn) sinh ra và trưởng thành trong giai đoạn đất nước thực hiện công cuộc Đổi mới và hội nhập quốc tế sâu rộng; họ là những <em>«công dân số»</em> mang tính toàn cầu, chịu sự tác động trực tiếp và mạnh mẽ nhất từ nền kinh tế thị trường, quá trình đô thị hóa khốc liệt và Cách mạng công nghiệp 4.0.</p>
+      <div class="subsection-title">Đặc điểm tâm lý giới trẻ Việt Nam</div>
+      <p>Đặt trong bối cảnh vĩ mô đầy biến động đó, cần nhận thức rằng bản thân giới trẻ cũng đang trải qua một giai đoạn chuyển tiếp vô cùng nhạy cảm về mặt sinh học và tâm lý học phát triển. Đây là thời kỳ bùng nổ thể chất, hoàn thiện mạng lưới thần kinh thùy trán (cơ quan kiểm soát xung động) và quan trọng nhất là hành trình rứt khỏi sự bao bọc của gia đình để xác lập <em>«chủ thể tính»</em> hay định hình bản sắc cá nhân.</p>
+      <p>Hệ quả của sự va đập giữa một cấu trúc tâm lý đang định hình và một thực tại khốc liệt là sự xuất hiện của những đặc tính <strong>«lưỡng cực»</strong> trong đời sống tinh thần của giới trẻ đô thị. Một mặt, họ bộc lộ sự năng động, nhạy bén với công nghệ, sở hữu tư duy mở và khát khao mãnh liệt trong việc khẳng định sự độc đáo của cái tôi cá nhân. Nhưng mặt khác, ẩn dưới vỏ bọc tự tin ấy là sự mỏng manh và rất dễ bị tổn thương. Nếu không có một nền tảng tư tưởng dẫn đường vững chắc, sự chông chênh này tất yếu sẽ chuyển hóa thành trạng thái hoang mang, trôi dạt và châm ngòi cho những cuộc khủng hoảng hiện sinh sâu sắc.</p>
+
+      <hr class="fancy-hr">
+
+      <!-- ══ CHƯƠNG II ══ -->
+      <div id="chuong-2" class="chapter-header">
+        <div class="chapter-num">Chương II</div>
+        <h2 class="chapter-title">Thực trạng Khủng hoảng Mục đích Sống của một bộ phận Giới trẻ ở Việt Nam Hiện nay</h2>
+      </div>
+
+      <!-- 1. Thực trạng -->
+      <div id="thuc-trang" class="section-header">
+        <div class="section-num">Mục 1</div>
+        <h3 class="section-title">Thực trạng của khủng hoảng mục đích sống của một bộ phận giới trẻ ở Việt Nam hiện nay</h3>
+      </div>
+      <p class="dropcap">Bước vào thập niên thứ ba của thế kỷ 21, bức tranh về đời sống tinh thần của giới trẻ tại các trung tâm kinh tế - văn hóa lớn như Hà Nội và Thành phố Hồ Chí Minh đang bộc lộ những mảng màu sáng tối đan xen phức tạp. Đằng sau lớp vỏ bọc năng động, hiện đại và mức sống vật chất không ngừng được cải thiện, một bộ phận không nhỏ thanh thiếu niên đang phải vật lộn với trạng thái hoang mang sâu sắc về sự tồn tại.</p>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-number">39%</div>
+          <div class="stat-label">Thanh niên đạt mức sức khỏe tâm thần <strong>tốt</strong></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">46,6%</div>
+          <div class="stat-label">Ở mức sức khỏe tâm thần <strong>trung bình</strong></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">14,3%</div>
+          <div class="stat-label">Rơi vào tình trạng sức khỏe tâm thần <strong>kém</strong></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1,6 triệu</div>
+          <div class="stat-label">Thanh niên thuộc nhóm <strong>NEET</strong> (15-24 tuổi) — Q3/2025</div>
+        </div>
+      </div>
+
+      <p>Khảo sát thực trạng diện rộng tại Hà Nội trên 356 thanh niên sử dụng bộ công cụ MHI-5 kết hợp với phân tích hồ sơ tiềm ẩn [16] đã phơi bày một thực tế khắc nghiệt: chỉ có <strong>39,0%</strong> người trẻ đạt mức «sức khỏe tâm thần tốt», có tới <strong>46,6%</strong> thanh niên nằm ở mức «sức khỏe tâm thần trung bình», và đặc biệt báo động là <strong>14,3%</strong> rơi vào tình trạng «sức khỏe tâm thần kém». Đặc biệt, <strong>14,1%</strong> thanh thiếu niên từng có suy nghĩ tự tử, và <strong>5,7%</strong> đã lên kế hoạch thực hiện hành vi tự hủy hoại.</p>
+      <p>Báo cáo Khảo sát Sức khỏe Tâm thần Vị thành niên Việt Nam (V-NAMHS) năm 2023 (UNICEF Việt Nam [7]) cho thấy trong vòng 12 tháng, có tới <strong>21,7%</strong> thanh thiếu niên Việt Nam gặp vấn đề sức khỏe tâm thần. Tại Đại học Quốc gia TP.HCM, khảo sát năm 2021 trên hơn <strong>37.000 sinh viên</strong> cho thấy: <strong>56,8%</strong> sinh viên mất tập trung hoặc thiếu hứng thú với cuộc sống và học tập; <strong>56,2%</strong> gặp rối loạn giấc ngủ.</p>
+
+      <div class="callout">
+        <p>Con số 1,6 triệu thanh niên thuộc nhóm «3 Không» (NEET) mang một ý nghĩa xã hội học vô cùng sâu sắc. Họ không hẳn là những người lười biếng theo định kiến thông thường, mà nhiều người trong số đó cảm thấy choáng ngợp, kiệt quệ và nhận ra rằng sự nỗ lực làm việc cật lực không còn hứa hẹn một tương lai ổn định.</p>
+        <div class="callout-source">Phân tích thực trạng — Quý III/2025</div>
+      </div>
+
+      <div class="subsection-title">Biểu hiện tâm lý</div>
+      <p>Sự khủng hoảng được biểu hiện rõ qua các cuộc chiến trong tâm trí — những dấu hiệu khó nhận biết từ bên ngoài vì giới trẻ thường có xu hướng «ngụy trang» bằng một vẻ ngoài bình ổn trên mạng xã hội:</p>
+      <ul class="body-list">
+        <li><strong>Cảm giác trống rỗng và vô nghĩa:</strong> Họ liên tục tự hỏi «Mình làm việc này để làm gì?», «Tiền bạc và thành công có thực sự quan trọng?». Ngay cả khi đạt được một thành tựu, cảm giác thỏa mãn cũng tan biến rất nhanh, thay vào đó là sự trống rỗng.</li>
+        <li><strong>Sự mất kết nối:</strong> Cảm thấy lạc lõng ngay cả khi đang ở cạnh gia đình hoặc bạn bè. Họ thấy mình không thuộc về những giá trị cũ của cha mẹ, nhưng cũng không tìm thấy sự an ủi thực sự trong các mối quan hệ ảo.</li>
+        <li><strong>Hội chứng «Kẻ mạo danh»:</strong> Luôn lo sợ rằng những gì mình có được là do may mắn và một ngày nào đó mọi người sẽ nhận ra mình thực sự kém cỏi. Điều này trầm trọng hơn do việc liên tục so sánh bản thân với những «profile» hoàn hảo trên LinkedIn hay Facebook.</li>
+        <li><strong>Sự tê liệt trong quyết định:</strong> Khi đứng trước quá nhiều lựa chọn của thời đại mở cửa, họ bị hoang mang. Nỗi sợ chọn sai dẫn đến việc không dám chọn gì cả, hoặc trì hoãn cực độ.</li>
+        <li><strong>Trạng thái «Nằm phẳng»:</strong> Một sự buông xuôi thầm lặng. Họ không còn nhiệt huyết với các mục tiêu xa vời, chỉ muốn làm vừa đủ để tồn tại vì thấy tương lai quá mịt mù hoặc áp lực quá lớn.</li>
+      </ul>
+
+      <div class="subsection-title">Biểu hiện sức khỏe</div>
+      <p>Khủng hoảng hiện sinh kéo dài sẽ dẫn đến tình trạng cơ thể sẽ tự động cơ thể hóa các rối loạn tâm lý trở thành các triệu chứng vật lý:</p>
+      <ul class="body-list">
+        <li><strong>Rối loạn giấc ngủ:</strong> Đây là biểu hiện phổ biến nhất. Họ thường thức rất khuya để tìm cảm giác tự do ảo trên mạng, dẫn đến mất ngủ, ngủ không sâu giấc hoặc luôn thấy ác mộng về sự thất bại.</li>
+        <li><strong>Rối loạn tiêu hóa:</strong> Các bệnh lý như đau dạ dày, hội chứng ruột kích thích (IBS) thường xuyên xuất hiện khi họ lo âu về tương lai hoặc áp lực thành tích.</li>
+        <li><strong>Mệt mỏi mãn tính (Burnout):</strong> Luôn cảm thấy cạn kiệt năng lượng dù không làm việc nặng nhọc. Cảm giác nặng nề ở vai gáy, đau đầu vùng đỉnh hoặc thái dương do căng thẳng thần kinh kéo dài.</li>
+        <li><strong>Thay đổi khẩu vị đột ngột:</strong> Có thể là ăn quá nhiều để lấp đầy sự trống rỗng cảm xúc, hoặc chán ăn hoàn toàn, sụt cân do lo âu.</li>
+        <li><strong>Hệ miễn dịch suy yếu:</strong> Dễ mắc các bệnh vặt như cảm cúm, dị ứng da hoặc viêm nhiễm do nồng độ hormone căng thẳng (cortisol) trong máu luôn ở mức cao.</li>
+      </ul>
+
+      <div class="subsection-title">Mối liên hệ mật thiết giữa Tâm lý và Thể chất — Lý thuyết Chuyển dạng của Freud</div>
+      <p>Để giải mã tận gốc rễ mối liên hệ này, có thể vận dụng <em>«Lý thuyết Chuyển dạng» (Conversion Theory)</em> của Sigmund Freud. Vào cuối thế kỷ 19, trong quá trình nghiên cứu về các bệnh nhân mắc chứng Hysteria, Freud đã phát hiện ra sự liên kết chặt chẽ giữa tâm trí và cơ thể — ông đưa ra khái niệm <em>«chuyển dạng» (conversion)</em> để chỉ quá trình một cá nhân biến đổi một xung đột tâm lý thành một triệu chứng thể chất hữu hình.</p>
+      <p>Áp dụng học thuyết này vào thực trạng của giới trẻ đô thị Việt Nam hiện nay:</p>
+      <ul class="body-list">
+        <li><strong>Vỏ bọc mạng xã hội</strong> chính là tác nhân gây ra sự «dồn nén». Giới trẻ thường ngụy trang sự hoang mang, cảm giác vô nghĩa bằng một vỏ bọc hoàn hảo trên không gian mạng. Việc cố gắng kìm nén sự thật phũ phàng đòi hỏi một nguồn năng lượng khổng lồ — và khi nỗi đau hiện sinh không được cất lên thành lời, nó buộc phải tìm một lối thoát khác: cơ thể.</li>
+        <li><strong>Triệu chứng thể chất là tiếng nói của Vô thức đang kêu cứu.</strong> Hội chứng ruột kích thích (IBS), những cơn đau đầu hay trạng thái mệt mỏi rã rời (Burnout) chính là sự «cơ thể hóa» của cảm giác vô định. Khi người trẻ không thể tiêu hóa nổi những áp lực kỳ vọng từ gia đình, sự chối bỏ đó được chuyển dạng thành sự rối loạn của hệ tiêu hóa.</li>
+      </ul>
+      <p>Dưới góc độ duy vật lịch sử, sự kìm nén tâm lý dẫn đến việc cơ thể hóa này không sinh ra từ hư vô, và càng không đơn thuần là một dạng nhược điểm về thần kinh. Nó là hệ quả trực tiếp của sự tha hóa lao động và áp lực sinh tồn trong nền kinh tế thị trường đô thị.</p>
+
+      <!-- 2. Nguyên nhân -->
+      <div id="nguyen-nhan" class="section-header">
+        <div class="section-num">Mục 2</div>
+        <h3 class="section-title">Nguyên nhân khủng hoảng mục đích sống của một bộ phận giới trẻ ở Việt Nam hiện nay</h3>
+      </div>
+      <p>Sự đứt gãy về mặt ý nghĩa tồn tại và xu hướng thu mình khỏi các hoạt động xã hội không phải là một khiếm khuyết mang tính cá nhân thuần túy hay sự lười biếng bẩm sinh. Phân tích dưới lăng kính lý luận chính trị và xã hội học, đây là triệu chứng của những áp lực dồn nén đa tầng, phản ánh sự va đập khốc liệt giữa cấu trúc xã hội đang chuyển đổi và những đòi hỏi khắt khe của đời sống đô thị hiện đại. Cuộc khủng hoảng này là kết quả cộng hưởng từ <strong>bốn nhóm nguyên nhân cốt lõi: cá nhân, gia đình, nhà trường và xã hội.</strong></p>
+
+      <!-- 2.1 Cá nhân -->
+      <div id="ca-nhan" class="subsection-title">2.1. Nguyên nhân từ cá nhân</div>
+      <p>Bước vào kỷ nguyên số, không gian mạng không còn đơn thuần là một công cụ giao tiếp, mà đã trở thành một <em>«thực tại thứ hai»</em> chi phối mạnh mẽ hệ giá trị và thế giới quan của giới trẻ.</p>
+      <p><strong>Sự độc tài của «sự hoàn hảo ảo» và hội chứng FOMO:</strong> Mạng xã hội hiện đại vận hành dựa trên các thuật toán tối ưu hóa sự chú ý, nơi những gì được hiển thị thường là những phiên bản đã qua chọn lọc và lý tưởng hóa đến mức phi thực tế. Điều này vô hình trung tạo ra một <em>«sự độc tài của sự hoàn hảo»</em>. Hệ quả tất yếu là sự bùng nổ của hội chứng <strong>FOMO</strong> (Fear Of Missing Out - Nỗi sợ bị bỏ lỡ). Hội chứng này không chỉ dừng lại ở cảm giác lo âu tức thời, mà sâu xa hơn, nó hoạt động như một cơ chế «tự bóc lột» về mặt tinh thần.</p>
+      <p><strong>Sự tha hóa bản chất người và mâu thuẫn thực tại:</strong> Dưới góc độ triết học Mác - Lênin, người trẻ đang bị <em>«tha hóa danh tính»</em> bởi chính công nghệ. Họ không còn sống và hành động dựa trên những nhu cầu nội tại, chân thực, mà biến bản thân thành công cụ để thỏa mãn những «nhu cầu giả tạo» do truyền thông số nhào nặn.</p>
+      <p>Không gian mạng vẽ ra một bức tranh của cải và sự hưởng thụ vô hạn (đại diện cho những kỳ vọng ảo), nhưng thực tại vật chất (tồn tại xã hội) của giới trẻ đô thị lại đầy rẫy chông gai: chi phí sinh hoạt đắt đỏ, giá nhà ở tăng phi mã và áp lực cạnh tranh việc làm khốc liệt. Khi tồn tại xã hội không thể đáp ứng được những kỳ vọng do ý thức xã hội đặt ra, sự sụp đổ về mặt niềm tin và mục đích sống là điều tất yếu.</p>
+      <p>Hệ quả cuối cùng và cực đoan nhất chính là sự xuất hiện của trào lưu <strong>«Nằm thẳng» (Tang ping)</strong>. Về bản chất, đây là sự phản kháng tiêu cực trước trạng thái «nội quyển» (involution) — sự cạnh tranh khốc liệt nhưng không tạo ra thêm giá trị thặng dư. Vận dụng quy luật «Phủ định của phủ định», có thể thấy khi sự nỗ lực vượt quá ngưỡng chịu đựng mà không mang lại kết quả tương xứng, người trẻ chọn cách từ chối tham gia «cuộc chơi».</p>
+
+      <!-- 2.2 Gia đình -->
+      <div id="gia-dinh-nn" class="subsection-title">2.2. Nguyên nhân từ gia đình</div>
+      <p>Dưới góc nhìn của Chủ nghĩa Cộng đồng (Communitarianism) và Chủ nghĩa duy vật lịch sử, gia đình là tế bào của xã hội, là môi trường sinh thái đầu tiên kiến tạo nên ý thức đạo đức, bồi đắp tình cảm và lý tưởng sống của con người. Tuy nhiên, cấu trúc và chức năng của gia đình đang bị xói mòn nghiêm trọng, vô tình trở thành cội nguồn của những sang chấn tâm lý kéo dài.</p>
+      <p><strong>Sự xâm nhập của logic thị trường vào quan hệ tình cảm:</strong> Nhiều bậc phụ huynh, vì lo sợ con cái bị đào thải, đã dồn toàn bộ áp lực thành công lên vai thế hệ sau. Lúc này, tình yêu thương của cha mẹ bị «vật hóa», gắn chặt với điểm số, trường chuyên, lớp chọn và bảng vàng thành tích. Việc này tước đi cảm giác an toàn vô điều kiện vốn là quyền lợi hiển nhiên của con trẻ, sinh ra một cấu trúc tâm lý méo mó: giá trị tồn tại của bản thân chỉ được định đoạt bằng năng lực cạnh tranh và thành tích học tập.</p>
+      <div class="callout">
+        <p>Bộ phim <em>Nhà bà Nữ</em> của đạo diễn Trấn Thành đại diện cho kiểu phụ huynh kiểm soát cực đoan dưới vỏ bọc mỹ miều «tất cả vì muốn tốt cho con». Sự can thiệp thô bạo vào mọi quyết định chính là hành vi tước đoạt «chủ thể tính» của cá nhân. Khi gia đình từ bỏ vai trò là một bến đỗ bao dung để biến thành một «thị trường thu nhỏ», người trẻ sẽ hoàn toàn mất đi không gian để tự khám phá bản ngã.</p>
+        <div class="callout-source">Phân tích lăng kính triết học</div>
+      </div>
+
+      <!-- 2.3 Nhà trường -->
+      <div id="nha-truong-nn" class="subsection-title">2.3. Nguyên nhân từ nhà trường</div>
+      <p>Xét theo quan điểm của Chủ nghĩa Mác, giáo dục thuộc về kiến trúc thượng tầng, do đó nó phản ánh và phục vụ cho cơ sở hạ tầng kinh tế. Tại các đô thị lớn, môi trường giáo dục đang bộc lộ những bất cập mang tính hệ thống.</p>
+      <p><strong>Thứ nhất,</strong> áp lực học tập hiện nay bị chi phối mạnh mẽ bởi <em>chủ nghĩa thành tích cực đoan</em>. Giáo dục, về bản chất cội nguồn, phải là quá trình «khai phóng» nhân cách, dạy con người cách làm người, cách tư duy và xây dựng ý thức công dân. Tuy nhiên, hệ thống này đang bị thu hẹp một cách thực dụng thành công cụ đào tạo kỹ năng để cạnh tranh trên thị trường lao động.</p>
+      <p><strong>Thứ hai,</strong> từ áp lực thành tích đã nảy sinh hiện tượng <strong>«tha hóa học đường»</strong>. Vận dụng lý thuyết của C.Mác về «sự tha hóa của lao động», ta có thể thấy học sinh ngày nay đang bị tha hóa ngay trong chính quá trình tiếp thu tri thức:</p>
+      <ul class="body-list">
+        <li><strong>Tha hóa khỏi quá trình học:</strong> Học sinh học vẹt, học đối phó chứ không tìm thấy niềm vui trong việc tiếp thu kiến thức.</li>
+        <li><strong>Tha hóa khỏi sản phẩm của việc học:</strong> Điểm số và bằng cấp không đại diện cho trí tuệ nội hàm, mà chỉ là thứ hàng hóa để đổi lấy tấm vé vào đời.</li>
+        <li><strong>Tha hóa khỏi các mối quan hệ:</strong> Bạn bè đồng trang lứa không còn là cộng đồng tương trợ, mà biến thành đối thủ cạnh tranh trực tiếp trong các kỳ thi.</li>
+      </ul>
+      <p>Hậu quả tàn khốc nhất là khi giáo dục nặng về nhồi nhét kỹ năng sinh tồn mà thiếu vắng việc bồi dưỡng lý tưởng chính trị, đạo đức và khát vọng cống hiến cho cộng đồng. Bước ra khỏi cổng trường đại học, đối mặt với một xã hội bộn bề, những thanh niên này dễ dàng rơi vào trạng thái bàng quan, chán nản và trượt dài vào <strong>chủ nghĩa hư vô (Nihilism)</strong>.</p>
+
+      <!-- 2.4 Xã hội -->
+      <div id="xa-hoi-nn" class="subsection-title">2.4. Nguyên nhân từ xã hội</div>
+      <p>Vượt ra khỏi những ranh giới của cá nhân, gia đình và thiết chế giáo dục, cội rễ sâu xa nhất của cuộc khủng hoảng hiện sinh nằm ở cấu trúc vĩ mô của nền kinh tế - xã hội.</p>
+      <p><strong>Thứ nhất,</strong> sự xâm lăng của logic thị trường và quá trình <em>«Tư nhân hóa rủi ro» (privatization of risk)</em>. Cấu trúc kinh tế hiện đại truyền bá thông điệp rằng mỗi cá nhân là một «doanh nghiệp của chính mình». Thành công là do bạn nỗ lực, và thất bại hoàn toàn là lỗi do bạn kém cỏi, bất chấp những rào cản khách quan khổng lồ về lạm phát hay khủng hoảng kinh tế. Sự quy chụp trách nhiệm cực đoan này đã «nguyên tử hóa» xã hội, tước bỏ đi các giá trị về sự đoàn kết và tương trợ cộng đồng.</p>
+      <p><strong>Thứ hai,</strong> hiện tượng <em>«Xã hội mệt mỏi» (Burnout Society)</em> — <em>«Bi kịch của sự Tự bóc lột»</em>. Mượn lăng kính của triết gia Byung-Chul Han [10], có thể thấy giới trẻ đô thị Việt Nam đang bước vào một «xã hội thành tích». Điểm khác biệt lớn nhất so với xã hội kỷ luật truyền thống là xã hội hiện đại được định hình bởi tính tích cực thái quá: mệnh lệnh «Tôi có thể làm được» (Toxic positivity). Sự nguy hiểm tột độ nằm ở chỗ: con người tự biến mình thành chủ thể «tự bóc lột» một cách hoàn toàn tự nguyện dưới vỏ bọc của sự tự do và phát triển bản thân.</p>
+      <p><strong>Thứ ba,</strong> cạm bẫy của Chủ nghĩa Hư vô (Nihilism) được thể hiện qua lăng kính Văn hóa Đại chúng:</p>
+      <ul class="body-list">
+        <li><strong>Bộ phim <em>Soul</em> (Pixar, 2020) — Đoạt giải Oscar Phim Hoạt hình xuất sắc nhất:</strong> Trực tiếp phê phán việc xã hội «thần thánh hóa» mục đích sống và gắn chặt nó với thành tích sự nghiệp. Nó vạch trần sự thật phũ phàng: khi con người đạt được mục tiêu vật chất mà họ lầm tưởng là «lẽ sống», thứ chờ đợi họ thường là một khoảng trống tột độ.</li>
+        <li><strong>Bộ phim <em>Everything Everywhere All At Once</em> (2022) — Đoạt giải Oscar Phim hay nhất:</strong> Phác họa hoàn hảo tâm lý của một thế hệ lớn lên trong kỷ nguyên số. Sự quá tải thông tin, đa vũ trụ của các lựa chọn và áp lực hiện sinh đã đẩy người trẻ vào trạng thái của Chủ nghĩa hư vô thụ động (Passive Nihilism) — cảm giác «chẳng có gì quan trọng cả», mọi nỗ lực đều là vô nghĩa.</li>
+      </ul>
+
+      <!-- 3. Hệ quả -->
+      <div id="he-qua" class="section-header">
+        <div class="section-num">Mục 3</div>
+        <h3 class="section-title">Hệ quả của khủng hoảng mục đích sống</h3>
+      </div>
+      <p>Sự sụp đổ về mặt mục đích sống ở một bộ phận giới trẻ không chỉ dừng lại ở những chấn thương tâm lý hay những bế tắc mang tính cá nhân. Dưới lăng kính của chủ nghĩa duy vật lịch sử, hiện tượng này là một chỉ báo vĩ mô, phản ánh sự mâu thuẫn sâu sắc trong quá trình vận động biện chứng giữa <em>«tồn tại xã hội»</em> và <em>«ý thức xã hội»</em> của một quốc gia đang trong thời kỳ đẩy mạnh công nghiệp hóa, hiện đại hóa và hội nhập quốc tế sâu rộng.</p>
+      <p>Sự khủng hoảng này thực chất là một <strong>quả bom nổ chậm</strong> đe dọa trực tiếp đến sự phát triển bền vững của quốc gia trên cả ba cấp độ cấu trúc: cá nhân (lực lượng lao động), gia đình và xã hội.</p>
+
+      <!-- 3.1 Cá nhân -->
+      <div id="he-qua-ca-nhan" class="subsection-title">3.1. Đối với cá nhân</div>
+      <p>Hệ quả tàn khốc nhất là sự bào mòn sức khỏe sinh lý và tâm lý (lo âu hiện sinh, trầm cảm, kiệt sức). Việc 1,6 triệu thanh niên rơi vào nhóm NEET là bằng chứng rõ nét cho thấy một bộ phận giới trẻ đang tự loại bỏ mình khỏi các chức năng chính trị - kinh tế - xã hội, chôn vùi bản thân trong sự đình trệ và đối mặt với rủi ro bị đào thải vĩnh viễn.</p>
+      <p>Sự tha hóa này chia rẽ người trẻ thành những nhóm bế tắc khác nhau. Có nhóm sở hữu học vấn cao (<strong>18,5%</strong> thanh niên NEET) nhưng bị lực lượng sản xuất mới (Trí tuệ nhân tạo - AI) đào thải một cách tàn nhẫn. Ngược lại, có một nhóm tầng lớp tinh hoa về kỹ năng số (chiếm tới <strong>22,1%</strong> nhóm NEET) lại chủ động chối bỏ thị trường — họ nhận ra rằng dù có vắt kiệt sức lao động, họ vẫn không thể đạt được các điều kiện sinh hoạt vật chất cơ bản.</p>
+
+      <!-- 3.2 Gia đình -->
+      <div id="he-qua-gia-dinh" class="subsection-title">3.2. Đối với gia đình</div>
+      <p>Khủng hoảng hiện sinh dẫn đến sự phản kháng ngầm chống lại các thiết chế truyền thống. Đáng chú ý nhất là tâm lý <strong>«ngại kết hôn, lười sinh con»</strong>. Cảm giác vô định về tương lai và sự thiếu hụt mạng lưới an sinh (nhà ở, y tế) khiến nhiều người trẻ từ chối lập gia đình.</p>
+      <p>Theo thống kê năm 2024, tỷ lệ tăng dân số tự nhiên của TP.HCM chỉ đạt <strong>0,92%</strong>. Mức sinh trung bình của Việt Nam năm 2024 chạm đáy kỷ lục với <strong>1,91 con/phụ nữ</strong>. Khi người trẻ lùi thời điểm sinh con để chờ đợi sự vững vàng về tài chính, ý thức của họ vô tình mâu thuẫn trực tiếp với quy luật sinh học khách quan: khả năng thụ thai tự nhiên giảm từ 85% ở tuổi dưới 30 xuống chỉ còn <strong>44%</strong> ở tuổi 40.</p>
+
+      <!-- 3.3 Xã hội -->
+      <div id="he-qua-xa-hoi" class="subsection-title">3.3. Đối với xã hội</div>
+      <p>Ở quy mô vĩ mô, việc <strong>11,5%</strong> lực lượng thanh niên (tương đương 1,6 triệu người) đứng ngoài lề xã hội là sự lãng phí nguồn lực quốc gia nghiêm trọng. Nguy hiểm hơn, dưới góc độ an ninh chính trị, tình trạng khủng hoảng niềm tin và sự mệt mỏi kéo dài dẫn đến thái độ thờ ơ chính trị, bàng quan trước những vấn đề chung của đất nước, nhạt phai lý tưởng cách mạng. Nếu thanh niên không có lý tưởng, xã hội sẽ mất đi «rường cột» vững chắc, làm suy yếu sức mạnh của khối đại đoàn kết toàn dân tộc.</p>
+      <p>Triết học Mác - Lênin khẳng định, ý thức xã hội không phải là một thực thể tĩnh lặng. Sự nguy hiểm bùng phát khi các thế lực thù địch lợi dụng khoảng trống mục đích sống này để gieo rắc tư tưởng lai căng, lệch chuẩn trên không gian mạng.</p>
+
+      <hr class="fancy-hr">
+
+      <!-- ══ CHƯƠNG III ══ -->
+      <div id="chuong-3" class="chapter-header">
+        <div class="chapter-num">Chương III</div>
+        <h2 class="chapter-title">Một số Giải pháp Chủ yếu Khắc phục Khủng hoảng Mục đích Sống của một bộ phận Giới trẻ ở Việt Nam Hiện nay</h2>
+      </div>
+
+      <p>Để giải quyết tận gốc cuộc khủng hoảng mục đích sống của thanh niên, không thể chỉ dừng lại ở các liệu pháp tâm lý cá nhân mang tính xoa dịu. Vấn đề này đòi hỏi sự can thiệp từ góc độ lý luận chính trị và quản trị quốc gia: phải tái thiết lập mối quan hệ hài hòa giữa cá nhân, cộng đồng và Nhà nước, trên nền tảng Tư tưởng Hồ Chí Minh và Chủ nghĩa Mác - Lênin. <strong>Chiến lược phát triển thanh niên Việt Nam giai đoạn 2021 - 2030 [4]</strong> chính là kim chỉ nam vĩ mô cho công cuộc này.</p>
+
+      <!-- Giải pháp 1 -->
+      <div id="giai-phap-gioi-tre" class="section-header">
+        <div class="section-num">Giải pháp 1</div>
+        <h3 class="section-title">Đối với giới trẻ</h3>
+      </div>
+      <p>Dưới góc độ chủ thể, thanh niên cần phải làm một cuộc <strong>«cách mạng nhận thức»</strong> để kháng cự lại sự tha hóa và chủ nghĩa cá nhân cực đoan, tự kiến tạo mục đích sống cho bản thân.</p>
+      <ul class="body-list">
+        <li><strong>Chuyển dịch triết lý sống</strong> từ việc thỏa mãn nhu cầu cá nhân ngắn hạn sang việc cống hiến cho cộng đồng. Theo Chủ nghĩa Mác - Lênin, con người chỉ có thể phát triển toàn diện trong một tập thể đoàn kết. V.I. Lênin từng nhấn mạnh, tương lai của chủ nghĩa cộng sản thuộc về thanh niên, và việc lôi cuốn thanh niên vào sự nghiệp xây dựng xã hội mới là điều kiện tiên quyết.</li>
+        <li><strong>Thấm nhuần tư tưởng Hồ Chí Minh về đạo đức cách mạng.</strong> Người chỉ rõ: <em>«Đạo đức cách mạng là bất kỳ ở cương vị nào, bất kỳ làm công việc gì, đều không sợ khó, không sợ khổ, đều một lòng một dạ phục vụ lợi ích chung của giai cấp, của nhân dân»</em> [2]. Thanh niên cần biết giải quyết hài hòa giữa lợi ích cá nhân và tập thể; vượt qua lối sống thực dụng để vươn tới lý tưởng lớn.</li>
+        <li><strong>Không ngừng rèn luyện bản lĩnh chính trị và sức đề kháng tư tưởng.</strong> Thực hiện lời dạy của Bác: <em>«Học hỏi là một việc phải tiếp tục suốt đời»</em> [2], gắn lý luận với thực tiễn để không ngừng tiến bộ. Sinh viên cần bước ra khỏi vùng an toàn của thế giới số để tham gia các nghiên cứu khoa học thực nghiệm hoặc các chiến dịch tình nguyện vì cộng đồng.</li>
+      </ul>
+
+      <!-- Giải pháp 2 -->
+      <div id="giai-phap-gia-dinh" class="section-header">
+        <div class="section-num">Giải pháp 2</div>
+        <h3 class="section-title">Đối với gia đình</h3>
+      </div>
+      <p>Gia đình cần được tái cấu trúc để thực sự trở thành một <em>«mạng lưới an sinh xã hội»</em> về mặt tinh thần, đồng thời là môi trường văn hóa đầu tiên bồi dưỡng những người thừa kế <em>«vừa hồng vừa chuyên»</em> như di nguyện của Chủ tịch Hồ Chí Minh.</p>
+      <p>Phụ huynh cần từ bỏ triết lý giáo dục dựa trên <em>«sự quan tâm có điều kiện»</em> mang nặng tính thị trường, cạnh tranh. Thay vì biến tình yêu thương thành phần thưởng cho điểm số hay thành tích, gia đình phải cung cấp sự hỗ trợ vô điều kiện, bao dung và tôn trọng sự lựa chọn cá nhân của con trẻ.</p>
+      <p>Tuy nhiên, dưới góc độ duy vật lịch sử, để ý thức xã hội (quan niệm giáo dục của gia đình) thay đổi, thì tồn tại xã hội (áp lực kinh tế đè nặng lên gia đình) cũng cần được giải tỏa. Việc Nhà nước can thiệp mạnh mẽ bằng các chính sách an sinh dân số đột phá — chẳng hạn như dành quyền ưu tiên mua hoặc thuê nhà ở xã hội cho các cặp vợ chồng trẻ — chính là đòn bẩy vật chất thiết thực nhất.</p>
+
+      <!-- Giải pháp 3 -->
+      <div id="giai-phap-nha-truong" class="section-header">
+        <div class="section-num">Giải pháp 3</div>
+        <h3 class="section-title">Đối với nhà trường</h3>
+      </div>
+      <p>Ngành giáo dục mang trong mình sứ mệnh chính trị to lớn là <em>«trồng người»</em>, do đó cần tiến hành những cải cách căn bản để đẩy lùi hiện tượng «tha hóa học đường».</p>
+      <ul class="body-list">
+        <li><strong>Kiên quyết chấm dứt chủ nghĩa thành tích cực đoan.</strong> Giáo dục cần thay đổi cơ chế đánh giá, chuyển từ việc coi học sinh là công cụ cạnh tranh điểm số sang triết lý giáo dục khai phóng, nhằm đạt được sự phát triển toàn diện. Cần mạnh dạn bổ sung cơ chế cộng điểm thưởng hoặc quy đổi tín chỉ cho những sinh viên tích cực tham gia các dự án giải quyết vấn đề cộng đồng.</li>
+        <li><strong>Đẩy mạnh giáo dục lý luận chính trị, tư tưởng và đạo đức lối sống.</strong> Cần đưa việc nghiên cứu, học tập lý luận chủ nghĩa Mác-Lênin và tư tưởng Hồ Chí Minh trở thành nền tảng định hướng mục đích sống. Từ đó, giúp sinh viên trang bị «sức đề kháng» trước thông tin xấu độc, lối sống thực dụng.</li>
+        <li><strong>Thể chế hóa hệ thống tham vấn tâm lý học đường.</strong> Nhà trường không chỉ là nơi truyền thụ tri thức mà còn phải là không gian để sinh viên an toàn bộc lộ những tổn thương. Cần tiên phong xây dựng mô hình <em>«tham vấn đồng đẳng» (peer-to-peer mentoring)</em> len lỏi vào sâu trong từng chi đoàn, câu lạc bộ.</li>
+        <li><strong>Tái định hình phương thức đào tạo để nâng cao năng lực hội nhập.</strong> Thay vì nhồi nhét lý thuyết, cần tập trung trang bị kỹ năng số, tạo điều kiện đổi mới sáng tạo để lực lượng lao động trẻ không bị Trí tuệ nhân tạo (AI) đánh bật khỏi thị trường.</li>
+      </ul>
+
+      <!-- Giải pháp 4 -->
+      <div id="giai-phap-xa-hoi" class="section-header">
+        <div class="section-num">Giải pháp 4</div>
+        <h3 class="section-title">Đối với xã hội</h3>
+      </div>
+      <p>Ở cấp độ vĩ mô, Đảng và Nhà nước đóng vai trò kiến tạo không gian sống và hệ tư tưởng dẫn đường, phá vỡ những áp lực tiêu cực của cấu trúc kinh tế hiện đại.</p>
+      <ul class="body-list">
+        <li><strong>Vận dụng sáng tạo quan điểm Chủ nghĩa Mác - Lênin và Tư tưởng Hồ Chí Minh</strong> về khắc phục sự tha hóa con người. Nền kinh tế thị trường định hướng xã hội chủ nghĩa phải đặt sự phát triển toàn diện, tự do của con người lên hàng đầu, giải phóng con người khỏi áp bức, bóc lột và sự tha hóa.</li>
+        <li><strong>Triển khai quyết liệt và hiệu quả Chiến lược phát triển thanh niên Việt Nam giai đoạn 2021-2030.</strong> Cần có cơ chế thu hút thanh niên tình nguyện đến công tác tại vùng sâu, vùng xa, biên giới, hải đảo. Hướng tới mục tiêu phấn đấu có <strong>15%</strong> thanh niên trong các cơ quan nhà nước được đảm nhiệm các chức vụ lãnh đạo, quản lý vào năm 2030.</li>
+        <li><strong>Đổi mới phương thức tập hợp thanh niên</strong> thông qua các phong trào thi đua ái quốc. Theo tư tưởng Hồ Chí Minh, <em>«Thi đua là một cách rất tốt, rất thiết thực để làm cho mọi người tiến bộ»</em> và làm cho <em>«đoàn kết chặt chẽ thêm»</em> [2]. Đặc biệt, Đoàn Thanh niên cần hiện đại hóa không gian giáo dục tư tưởng, vươn mạnh lên môi trường mạng với mục tiêu trên <strong>70%</strong> thanh niên được tiếp cận thông tin chính sách qua các nền tảng trực tuyến.</li>
+      </ul>
+    </div><!-- /phan-noi-dung -->
+
+    <hr class="fancy-hr">
+
+    <!-- ═══════════════════════════════════════
+         PHẦN III. KẾT LUẬN
+    ═══════════════════════════════════════ -->
+    <div id="ket-luan" id="conclusion-section" style="background:linear-gradient(135deg,#1a2744,#2a3a5c);color:#e8e0d8;padding:2.5rem;border-radius:10px;margin:2rem 0;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 110% 110%,#8b263520 0%,transparent 55%);pointer-events:none;"></div>
+      <div style="position:relative;">
+        <div class="part-tag" style="color:#e8c97a;">Phần III</div>
+        <h2 class="part-title" style="color:#fff;margin-bottom:1.5rem;">Kết luận</h2>
+        <p style="color:#d8d0c8;">Cuộc khủng hoảng mục đích sống của một bộ phận giới trẻ Việt Nam tại các đô thị lớn hiện nay là một lăng kính phản chiếu rõ nét những biến chuyển, đứt gãy trong cấu trúc kinh tế, chính trị và văn hóa - xã hội. Những biểu hiện thoái lui khỏi các nghĩa vụ cơ bản hay trào lưu buông xuôi, thu mình không đơn thuần là sự bế tắc mang tính cá nhân. Bản chất của hiện tượng này là hệ quả của một trạng thái tha hóa, nơi con người bị cuốn vào guồng quay bóc lột của chủ nghĩa thành tích, tư duy thị trường và đánh mất phương hướng giữa vòng xoáy của kỷ nguyên số.</p>
+        <p style="color:#d8d0c8;">Dưới góc độ lý luận chính trị, việc đánh mất lý tưởng sống ở thế hệ trẻ là một rủi ro hiện hữu, đe dọa trực tiếp đến động lực phát triển nội sinh và sức mạnh đại đoàn kết toàn dân tộc. Việc kiến tạo một mục đích sống rõ ràng, do đó, không chỉ đáp ứng nhu cầu tự thân nhằm bảo vệ sức khỏe tâm thể cho mỗi cá nhân, mà còn là cơ chế thiết yếu để định hình tư cách công dân, củng cố lòng yêu nước và khẳng định tính chủ thể chính trị của lớp người kế cận.</p>
+        <p style="color:#d8d0c8;">Để giải quyết triệt để cuộc khủng hoảng này, sự nỗ lực đơn lẻ là chưa đủ mà đòi hỏi một <strong style="color:#e8c97a;">chiến lược đồng kiến tạo từ bốn trụ cột</strong>. Mỗi thanh niên cần tự giác rèn luyện bản lĩnh chính trị để vượt lên lối sống thực dụng; gia đình cần tái lập nền tảng cộng đồng bao dung; nhà trường phải chuyển đổi mạnh mẽ sang triết lý giáo dục khai phóng. Hơn tất cả, Nhà nước đóng vai trò kiến tạo vĩ mô thông qua việc hoàn thiện hệ thống an sinh xã hội, kiên định dẫn dắt thế hệ trẻ bằng lý tưởng cách mạng theo nền tảng của Chủ nghĩa Mác - Lênin và Tư tưởng Hồ Chí Minh.</p>
+        <p style="color:#c8c0b8;font-style:italic;">Chỉ khi giải phóng được thanh niên khỏi sự tha hóa và khơi dậy mạnh mẽ khát vọng cống hiến, Việt Nam mới có thể xây dựng được một thế hệ rường cột vững chắc, đưa đất nước tự tin vươn mình trong kỷ nguyên mới.</p>
+      </div>
+    </div>
+
+    <hr class="fancy-hr">
+
+    <!-- ═══════════════════════════════════════
+         TÀI LIỆU THAM KHẢO
+    ═══════════════════════════════════════ -->
+    <div id="tai-lieu" class="ref-section">
+      <div class="part-header">
+        <div class="part-tag">Danh mục</div>
+        <h2 class="part-title">Tài liệu Tham khảo</h2>
+      </div>
+
+      <div class="ref-group-title">I. Tài liệu tiếng Việt</div>
+
+      <div class="ref-item">
+        <span class="ref-num">[1]</span>
+        <span>Đảng Cộng sản Việt Nam (2021). <em>Văn kiện Đại hội đại biểu toàn quốc lần thứ XIII</em>, Nxb. Chính trị quốc gia Sự thật, Hà Nội.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[2]</span>
+        <span>Hồ Chí Minh (2011). <em>Toàn tập (Tập 12, 15)</em>, Nxb. Chính trị quốc gia Sự thật, Hà Nội.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[3]</span>
+        <span>Nguyễn Thị Thanh Huyền (2010). <em>Quan niệm của C. Mác về tha hóa và ý nghĩa của quan niệm đó đối với phát triển con người Việt Nam hiện nay</em>, Nxb. Chính trị quốc gia, Hà Nội.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[4]</span>
+        <span>Thủ tướng Chính phủ (2021). <em>Quyết định số 1331/QĐ-TTg về việc ban hành Chiến lược phát triển thanh niên Việt Nam giai đoạn 2021 - 2030</em>, Hà Nội.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[5]</span>
+        <span>Thủ tướng Chính phủ (2022). <em>Quyết định số 311/QĐ-TTg phê duyệt Chương trình «Giáo dục lý tưởng cách mạng, đạo đức, lối sống văn hóa cho thanh niên, thiếu niên, nhi đồng trên không gian mạng giai đoạn 2022 - 2030»</em>, Hà Nội.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[6]</span>
+        <span>Tổng cục Thống kê (2025). <em>Báo cáo tình hình dân số, lao động và việc làm quý III và 9 tháng năm 2025</em>, Hà Nội.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[7]</span>
+        <span>UNICEF Việt Nam (2023). <em>Báo cáo khảo sát Sức khỏe Tâm thần Vị thành niên Việt Nam (V-NAMHS)</em>, Hà Nội.</span>
+      </div>
+
+      <div class="ref-group-title">II. Tài liệu tiếng Anh</div>
+
+      <div class="ref-item">
+        <span class="ref-num">[8]</span>
+        <span>Baumeister, R. F., Vohs, K. D., Aaker, J. L., &amp; Garbinsky, E. N. (2013). Some key differences between a happy life and a meaningful life. <em>The Journal of Positive Psychology, 8</em>(6), 505-516.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[9]</span>
+        <span>Boyle, P. A., Barnes, L. L., Buchman, A. S., &amp; Bennett, D. A. (2009). Purpose in life is associated with mortality among community-dwelling older persons. <em>Psychosomatic Medicine, 71</em>(5), 574-579.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[10]</span>
+        <span>Byung-Chul Han (2015). <em>The Burnout Society</em>. Stanford University Press.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[11]</span>
+        <span>Durkheim, E. (1951). <em>Suicide: A Study in Sociology</em> (J. A. Spaulding &amp; G. Simpson, Trans.). The Free Press. (Nguyên bản xuất bản năm 1897).</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[12]</span>
+        <span>Frankl, V. E. (1963). <em>Man's Search for Meaning</em>. Washington Square Press.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[13]</span>
+        <span>Phan, T. T., Nguyen, L. C., Nguyen, N. Q., &amp; Nguyen, Y. C. (2021). Dataset on Vietnamese high school students' school alienation and academic perfectionism. <em>Data in Brief, 39</em>, 107611.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[14]</span>
+        <span>Ryff, C. D. (1989). Happiness is everything, or is it? Explorations on the meaning of psychological well-being. <em>Journal of Personality and Social Psychology, 57</em>(6), 1069-1081.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[15]</span>
+        <span>Sandel, M. J. (1982). <em>Liberalism and the Limits of Justice</em>. Cambridge University Press.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[16]</span>
+        <span>Vu, T. H., et al. (2022). Mental health among urban youth in Vietnam: A cross-sectional study using MHI-5. <em>Frontiers in Psychology, 13</em>, 834957.</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-top:4rem;padding:2rem 0;border-top:1px solid var(--rule);text-align:center;">
+      <div style="font-family:var(--mono-font);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-muted);">
+        Đại học Bách Khoa Hà Nội · Tháng sinh viên Nghiên cứu Khoa học · Hà Nội, 4/2026
+      </div>
+    </div>
+
+  </div><!-- /content-wrap -->
+</main>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrollTop / docHeight) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('back-top').classList.toggle('visible', scrollTop > 400);
+  });
+
+  // Back to top
+  document.getElementById('back-top').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Mobile TOC toggle
+  const toggle = document.getElementById('toc-toggle');
+  const sidebar = document.getElementById('toc-sidebar');
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    toggle.textContent = sidebar.classList.contains('open') ? '✕ Đóng' : '☰ Mục lục';
+  });
+  document.addEventListener('click', e => {
+    if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+      sidebar.classList.remove('open');
+      toggle.textContent = '☰ Mục lục';
+    }
+  });
+
+  // Active TOC link on scroll
+  const sections = document.querySelectorAll('[id]');
+  const tocLinks = document.querySelectorAll('#toc-sidebar a[href^="#"]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0% -70% 0%' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
